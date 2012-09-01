@@ -1,0 +1,50 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Binisha's Shop</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<script src="js/ajaxTableDemo.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">Binisha's Project</a>
+				<ul class="nav">
+					<li><a href="index.html">Home</a>
+					<li><a href="ajaxTableDemo.html">Table Demo</a>
+					<li><a href="suggestionDemo.html">Suggestion Demo</a>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<section class="container">
+		<article class="articlecontent">
+		<h2>Our Products</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th><a href="#" title="Sort by ID" onclick="return sortTable(this)"> Id</a></th>
+						<th><a href="#" title="Sort by Firstname" onclick="return sortTable(this)">FirstName</th>
+						<th><a href="#" title="Sort by Lastname" onclick="return sortTable(this)">LastName</th>
+						<th><a href="#" title="Sort by Age" onclick="return sortTable(this)">Age</th>
+					</tr>
+				</thead>
+				<tbody id="content"></tbody>
+			</table>
+			<script type="text/javascript">
+				drawTable("content");
+			</script>
+		</article>
+		<aside class="rightsidebar">
+			<br>
+			<h1>Ihre Warencorb</h1>
+			<br>
+			<h1>Bezahlung</h1>
+		</aside>
+	</section>
+</body>
+</html>
