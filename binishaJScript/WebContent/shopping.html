@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Webshop</title>
+<link rel="stylesheet" href="css/styles.css" type="text/css" />
+<script src="js/ajaxTableDemo.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<header id="page_header">
+		<h1>Webshop</h1>
+
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Register</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section id="posts">
+		<article class="post">
+			<header>
+				<a href="#" class="btn btn-mini" onclick="eraseCookie('ppkcookie');">Remove all Items.</a>
+				<table class="table">
+					<thead>
+						<tr>
+							<th><a href="#" title="Sort by ID" onclick="return sortTable(this)"> Item No.</a></th>
+							<th><a href="#" title="Sort by Firstname" onclick="return sortTable(this)">Item</th>
+							<th><a href="#" title="Sort by Lastname" onclick="return sortTable(this)">LastName</th>
+							<th><a href="#" title="Sort by Age" onclick="return sortTable(this)">Price</th>
+							<th><a href="#">Buy</a></th>
+						</tr>
+					</thead>
+					<tbody id="content"></tbody>
+				</table>
+
+				<script type="text/javascript">
+					drawTable("content");
+				</script>
+			</header>
+		</article>
+	</section>
+	<section id="sidebar">
+		<nav>
+			<h3>Shopping Cart</h3>
+			<img src="img/ico_cart.jpg"  alt="cart"/>
+			<nav>
+				<ul id="shoppingList"></ul>
+			</nav>
+		</nav>
+	</section>
+	<footer id="page_footer">
+		<p>&copy: 2012 Binisha Tuladhar</p>
+
+	</footer>
+</body>
+</html>
