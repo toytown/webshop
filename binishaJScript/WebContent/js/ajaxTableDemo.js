@@ -1,44 +1,14 @@
 var jsData = new Array();
-jsData[0] = {
-	iD : 1,
-	firstname : "TV",
-	lastname : "Müller",
-	age : 46
-};
-jsData[1] = {
-	iD : 2,
-	firstname : "Desktop",
-	lastname : "Petlek",
-	age : 22
-};
-jsData[2] = {
-	iD : 3,
-	firstname : "Laptop",
-	lastname : "Halek",
-	age : 43
-};
-jsData[3] = {
-	iD : 4,
-	firstname : "Keyboard",
-	lastname : "Weinberger",
-	age : 25
-};
-jsData[4] = {
-	iD : 5,
-	firstname : "Mouse",
-	lastname : "Dirmer",
-	age : 28
-};
-jsData[5] = {
-	iD : 6,
-	firstname : "Telephone",
-	lastname : "Meier",
-	age : 50
-};
 
 // Draw table from jsData array of objects
+function sleep(delay) { 
+    var start = new Date().getTime(); 
+    while (new Date().getTime() < start + delay); 
+}
 
 function drawTable(tbody) {
+	sndReq();
+	
 	var tr, td;
 	tbody = document.getElementById(tbody);
 	// remove existing rows, if any
@@ -52,15 +22,17 @@ function drawTable(tbody) {
 
 		td.innerHTML = jsData[i].iD;
 		td = tr.insertCell(tr.cells.length);
-		td.innerHTML = jsData[i].firstname;
+		td.innerHTML = jsData[i].product;
 		td = tr.insertCell(tr.cells.length);
-		td.innerHTML = jsData[i].lastname;
+		td.innerHTML = jsData[i].desc;
 		td = tr.insertCell(tr.cells.length);
-		td.innerHTML = jsData[i].age;
+		td.innerHTML = jsData[i].price;
 		td = tr.insertCell(tr.cells.length);
 		td.innerHTML = "<a href=\"#\" onclick=\"addToCart(" + jsData[i].iD
 				+ ") \">Buy</a>";
 	}
+	
+	
 
 };
 
@@ -113,7 +85,7 @@ function getItem(id) {
 	for ( var i = 0; i < jsData.length; i++) {
 		console.log(jsData[i].iD);
 		if (jsData[i].iD == id) {
-			return jsData[i].firstname;
+			return jsData[i].product;
 		}
 	}
 
@@ -145,7 +117,7 @@ function readCookie(name) {
 function eraseCookie(name) {
 	var container = document.getElementById('shoppingList');
 	createCookie(name, "", -1);
-	
+
 	while (container.hasChildNodes()) {
 		container.removeChild(container.firstChild);
 	}
@@ -159,14 +131,12 @@ function sortTable(link) {
 	case "Id":
 		jsData.sort(sortById);
 		break;
-	case "FirstName":
-		jsData.sort(sortByFirstname);
+	case "Product":
+		jsData.sort(sortByProduct);
 		break;
-	case "LastName":
-		jsData.sort(sortByLastname);
-		break;
-	case "Age":
-		jsData.sort(sortByAge);
+
+	case "Price":
+		jsData.sort(sortByPrice);
 		break;
 	}
 	drawTable("content");
@@ -181,22 +151,15 @@ function sortById(a, b) {
 
 }
 
-function sortByFirstname(a, b) {
-	a = a.firstname.toLowerCase();
-	b = b.firstname.toLowerCase();
+function sortByProduct(a, b) {
+	a = a.product.toLowerCase();
+	b = b.product.toLowerCase();
 	return ((a < b) ? -1 : ((a > b) ? 1 : 0));
 
 }
 
-function sortByLastname(a, b) {
-	a = a.lastname.toLowerCase();
-	b = b.lastname.toLowerCase();
-	return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-
-}
-
-function sortByAge(a, b) {
-	return a.age - b.age;
+function sortByPrice(a, b) {
+	return a.price - b.price;
 
 }
 
@@ -207,4 +170,40 @@ function clearTable(tbody) {
 		tbody.deleteRow(0);
 	}
 
+	
 };
+
+// *********************Ajax
+
+var ajaxHandler = new XMLHttpRequest();
+ajaxHandler.onreadystatechange = handleResponse;
+
+function sndReq() {
+	ajaxHandler.open("GET", "products.txt");
+	ajaxHandler.send(null);
+}
+
+function handleResponse() {
+	if (ajaxHandler.readyState == 4) {
+		var fileContent = ajaxHandler.responseText;
+
+		loadData(fileContent);
+	
+	}
+}
+
+function loadData(fileContent) {
+	// first split fileContent with newline character \n
+	var lines = fileContent.split("\n");
+	jsData = new Array();
+	for ( var i = 0; i < lines.length; i++) {
+		var columns = lines[i].split(";");
+		
+			jsData[jsData.length] = {iD:columns[0], product:columns[1], desc:columns[2], price:columns[3] };
+			
+		
+	}
+
+	// for each line split the column values with column separator ;
+
+}
