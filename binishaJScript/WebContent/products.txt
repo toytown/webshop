@@ -1,0 +1,7 @@
+1;Television;Samsung Flat;909;
+2;Destop;Dell ;950;
+3;Laptop;HP ;800;
+4;Camera;Camera Nikon;900;
+5;Uhr;Rado Uhr ;1500;
+6;Book;Head First;40;
+7;Phone;Apple;500;

@@ -32,7 +32,9 @@ function drawTable(tbody) {
 				+ ") \">Buy</a>";
 	}
 	
-	
+	var x = readCookie('ppkcookie');
+	console.log("cookie value " + x);
+	displayShoppingCart(x);
 
 };
 
@@ -41,7 +43,7 @@ function addToCart(id) {
 	console.log("cookie value " + x);
 	if (x == null) {
 		createCookie('ppkcookie', id, 7);
-		updateShoppingCart(id);
+		displayShoppingCart(id);
 	} else {
 		addItemToExistingCookie(id);
 	}
@@ -52,12 +54,12 @@ function addItemToExistingCookie(id) {
 	var val = oldVal + "," + id;
 	createCookie('ppkcookie', val, 7);
 
-	updateShoppingCart(val); // update shopping cart list
+	displayShoppingCart(val); // update shopping cart list
 
 }
 
 //
-function updateShoppingCart(val) {
+function displayShoppingCart(val) {
 	var container = document.getElementById('shoppingList');
 	var valString = String(val);
 	if (valString.indexOf(",") > 0) {
@@ -70,12 +72,12 @@ function updateShoppingCart(val) {
 		for ( var i = 0; i < values.length; i++) {
 			var new_element = document.createElement('li');
 
-			new_element.innerHTML = "<span>" + getItem(values[i]) + "</span>";
+			new_element.innerHTML = "<span>" + getItem(values[i]) + "</span>" +  "<a  href='#' class='btn btn-mini' onclick='deleteItem(" + values[i] + ")'>Delete</a>";
 			container.insertBefore(new_element, container.firstChild);
 		}
 	} else {
 		var new_element = document.createElement('li');
-		new_element.innerHTML = "<span>" + getItem(val) + "</span>";
+		new_element.innerHTML = "<span>" + getItem(val) + "</span>" + "<a  >Delete Item</a>";
 		container.insertBefore(new_element, container.firstChild);
 	}
 
@@ -89,6 +91,18 @@ function getItem(id) {
 		}
 	}
 
+}
+
+function deleteItem(id) {
+	var container = document.getElementById('shoppingList');
+	
+	for (var i =0; i< container.childNodes.length; i++) {
+		Node node = container.childNodes[i];
+		
+		if (node == id) {
+			container.removeChild(container.childNodes[i]);
+		}
+	}
 }
 
 function createCookie(name, value, days) {
@@ -128,10 +142,10 @@ function sortTable(link) {
 
 	switch (link.firstChild.nodeValue) {
 
-	case "Id":
+	case "Item No":
 		jsData.sort(sortById);
 		break;
-	case "Product":
+	case "Item":
 		jsData.sort(sortByProduct);
 		break;
 

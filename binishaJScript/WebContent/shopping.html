@@ -1,6 +1,8 @@
 <html>
 <head>
 <title>Webshop</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="css/styles.css" type="text/css" />
 <script src="js/ajaxTableDemo.js" type="text/javascript"></script>
 </head>
@@ -19,15 +21,15 @@
 	<section id="posts">
 		<article class="post">
 			<header>
-				<a href="#" class="btn btn-mini" onclick="eraseCookie('ppkcookie');">Remove all Items.</a>
-				<a href="#" class="btn btn-mini" onclick= "drawTable('content');">Load all Items.</a>
+				<a href="#" class="btn btn-mini" onclick="eraseCookie('ppkcookie');">Remove all Items.</a> 
+				<a href="#" class="btn btn-mini" onclick="drawTable('content');">Load all Items.</a>
 				<table class="table">
 					<thead>
 						<tr>
-							<th><a href="#" title="Sort by ID" onclick="return sortTable(this)"> Item No.</a></th>
-							<th><a href="#" title="Sort by Firstname" onclick="return sortTable(this)">Item</th>
-							<th><a href="#" title="Sort by Lastname" onclick="return sortTable(this)">Description</th>
-							<th><a href="#" title="Sort by Age" onclick="return sortTable(this)">Price</th>
+							<th><a href="#" title="Sort by Item No." onclick="return sortTable(this)"> Item No.</a></th>
+							<th><a href="#" title="Sort by Item" onclick="return sortTable(this)">Item</th>
+							<th><a href="#" title="Sort by Description" onclick="return sortTable(this)">Description</th>
+							<th><a href="#" title="Sort by Price" onclick="return sortTable(this)">Price</th>
 							<th><a href="#">Buy</a></th>
 						</tr>
 					</thead>
@@ -43,7 +45,7 @@
 	<section id="sidebar">
 		<nav>
 			<h3>Shopping Cart</h3>
-			<img src="img/ico_cart.jpg"  alt="cart"/>
+			<img src="img/ico_cart.jpg" alt="cart" />
 			<nav>
 				<ul id="shoppingList"></ul>
 			</nav>
